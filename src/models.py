@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 from enum import Enum
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Optional, Dict, Any
 import uuid
 
@@ -24,8 +24,12 @@ class TodoItem:
     priority: Priority = Priority.MID
     status: Status = Status.PENDING
     owner: Optional[str] = None
-    created_at: str = field(default_factory=lambda: datetime.utcnow().isoformat() + "Z")
-    updated_at: str = field(default_factory=lambda: datetime.utcnow().isoformat() + "Z")
+    created_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat() + "Z"
+    )
+    updated_at: str = field(
+        default_factory=lambda: datetime.now(timezone.utc).isoformat() + "Z"
+    )
 
     def to_dict(self) -> Dict[str, Any]:
         return {
@@ -48,6 +52,10 @@ class TodoItem:
             priority=Priority(d.get("priority", Priority.MID.value)),
             status=Status(d.get("status", Status.PENDING.value)),
             owner=d.get("owner"),
-            created_at=d.get("created_at", datetime.utcnow().isoformat() + "Z"),
-            updated_at=d.get("updated_at", datetime.utcnow().isoformat() + "Z"),
+            created_at=d.get(
+                "created_at", datetime.now(timezone.utc).isoformat() + "Z"
+            ),
+            updated_at=d.get(
+                "updated_at", datetime.now(timezone.utc).isoformat() + "Z"
+            ),
         )

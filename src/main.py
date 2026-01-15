@@ -4,6 +4,7 @@ This implements a minimal `users.json` backing store for sign up and login
 so the app can be exercised. Passwords are stored as plain text here for
 simplicity — this can be replaced with hashed storage later.
 """
+
 from __future__ import annotations
 
 import json
