@@ -57,36 +57,43 @@ def main():
         print("2. Subtract")
         print("3. Multiply")
         print("4. Divide")
-        print("5. Exit")
+        print("5. Calculate Velocity")
+        print("6. Exit")
 
-        choice = input("\nEnter choice (1/2/3/4/5): ").strip()
+        choice = input("\nEnter choice (1/2/3/4/5/6): ").strip()
 
-        if choice == "5":
+        if choice == "6":
             print("Thank you for using the calculator. Goodbye!")
             break
 
-        if choice not in ["1", "2", "3", "4"]:
+        if choice not in ["1", "2", "3", "4", "5"]:
             print("Invalid choice. Please try again.")
             continue
 
         try:
-            num1 = float(input("Enter first number: "))
-            num2 = float(input("Enter second number: "))
+            if choice == "5":
+                distance = float(input("Enter distance: "))
+                time = float(input("Enter time: "))
+                result = calc.calculate_velocity(distance, time)
+                print(f"\nVelocity = {distance} / {time} = {result} units/time")
+            else:
+                num1 = float(input("Enter first number: "))
+                num2 = float(input("Enter second number: "))
 
-            if choice == "1":
-                result = calc.add(num1, num2)
-                operation = "+"
-            elif choice == "2":
-                result = calc.subtract(num1, num2)
-                operation = "-"
-            elif choice == "3":
-                result = calc.multiply(num1, num2)
-                operation = "*"
-            elif choice == "4":
-                result = calc.divide(num1, num2)
-                operation = "/"
+                if choice == "1":
+                    result = calc.add(num1, num2)
+                    operation = "+"
+                elif choice == "2":
+                    result = calc.subtract(num1, num2)
+                    operation = "-"
+                elif choice == "3":
+                    result = calc.multiply(num1, num2)
+                    operation = "*"
+                elif choice == "4":
+                    result = calc.divide(num1, num2)
+                    operation = "/"
 
-            print(f"\n{num1} {operation} {num2} = {result}")
+                print(f"\n{num1} {operation} {num2} = {result}")
 
         except ValueError as e:
             print(f"Error: {e}")
