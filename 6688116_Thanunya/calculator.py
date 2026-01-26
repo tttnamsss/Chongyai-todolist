@@ -25,6 +25,23 @@ class Calculator:
             raise ValueError("Cannot divide by zero")
         return a / b
 
+    def calculate_velocity(self, distance, time):
+        """Calculate velocity given distance and time.
+        
+        Args:
+            distance: Distance traveled (in any unit)
+            time: Time taken (in any unit)
+            
+        Returns:
+            Velocity as distance/time
+            
+        Raises:
+            ValueError: If time is zero
+        """
+        if time == 0:
+            raise ValueError("Time cannot be zero")
+        return distance / time
+
 
 def main():
     """Interactive calculator main function."""
