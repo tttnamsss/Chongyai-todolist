@@ -1,0 +1,11 @@
+C4Context
+    Person(student, "Student", "Manages personal tasks and views course assignments")
+    Person(instructor, "Instructor", "Views teaching tasks and monitors assignment deadlines")
+    Person(admin, "System Administrator", "Manages system configuration and monitors sync health")
+    System(ict_todo, "ICT To Do List", "Task management system for ICT e-learning environment")
+    System_Ext(mycourses, "MyCourses", "ICT e-learning system providing course and assignment data")
+
+    Rel(student, ict_todo, "Creates, views, updates, deletes tasks")
+    Rel(instructor, ict_todo, "Views tasks and monitors assignments")
+    Rel(admin, ict_todo, "Manages configuration and monitors health")
+    Rel(ict_todo, mycourses, "Retrieves assignments and submission status")

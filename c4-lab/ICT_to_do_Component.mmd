@@ -1,0 +1,20 @@
+C4Component
+    Container_Boundary(web_api, "Web API") {
+        Component(auth_comp, "Authentication & Authorization", "Python", "Handles login, token validation, access control")
+        Component(task_comp, "Task Management", "Python", "Handles CRUD operations for tasks")
+        Component(sync_orch, "MyCourses Sync Orchestrator", "Python", "Manages sync workflow and updates tasks")
+        Component(mycourses_client, "MyCourses Client", "Python", "Calls MyCourses web services, handles HTTPS/JSON")
+        Component(mapping_comp, "Mapping", "Python", "Converts MyCourses data to internal task model")
+        Component(sync_hist, "Sync History", "Python", "Records sync outcomes for monitoring")
+        Component(data_acc, "Data Access", "Python, SQLAlchemy", "Provides repository functions for DB access")
+    }
+
+    System_Ext(mycourses, "MyCourses", "ICT e-learning system")
+
+    Rel(auth_comp, data_acc, "Validates users")
+    Rel(task_comp, data_acc, "Performs CRUD")
+    Rel(sync_orch, mycourses_client, "Triggers calls")
+    Rel(sync_orch, mapping_comp, "Uses for data conversion")
+    Rel(sync_orch, sync_hist, "Logs outcomes")
+    Rel(sync_orch, data_acc, "Updates tasks")
+    Rel(mycourses_client, mycourses, "Calls web services", "HTTPS/JSON")

@@ -1,0 +1,22 @@
+C4Container
+    Person(student, "Student", "Manages personal tasks and views course assignments")
+    Person(instructor, "Instructor", "Views teaching tasks and monitors assignment deadlines")
+    Person(admin, "System Administrator", "Manages system configuration and monitors sync health")
+    System_Boundary(ict_todo, "ICT To Do List") {
+        Container(web_app, "Web App", "React", "Single-page application for browser-based task management")
+        Container(mobile_app, "Mobile App", "Flutter", "Cross-platform mobile application for iOS and Android")
+        Container(web_api, "Web API", "Python, FastAPI", "REST API exposing JSON endpoints")
+        ContainerDb(database, "Database", "PostgreSQL", "Stores user profiles, tasks, sync settings, and history")
+        Container(mycourses_connector, "MyCourses Connector", "Python", "Integration module for MyCourses web services")
+    }
+    System_Ext(mycourses, "MyCourses", "ICT e-learning system")
+
+    Rel(student, web_app, "Manages tasks via web interface")
+    Rel(student, mobile_app, "Manages tasks via mobile app")
+    Rel(instructor, web_app, "Views tasks and monitors assignments")
+    Rel(admin, web_app, "Manages configuration and monitors health")
+    Rel(web_app, web_api, "Makes API calls", "HTTPS/JSON")
+    Rel(mobile_app, web_api, "Makes API calls", "HTTPS/JSON")
+    Rel(web_api, database, "Reads/writes data", "SQL")
+    Rel(web_api, mycourses_connector, "Requests sync", "Internal interface")
+    Rel(mycourses_connector, mycourses, "Retrieves data", "HTTPS/JSON")
